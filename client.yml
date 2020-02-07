@@ -1,0 +1,12 @@
+ - name: Configure IPA client
+   hosts: client
+   become: true
+   
+   tasks:
+   - name: Install IPA client
+     yum:
+       name: freeipa-client
+       state: latest
+
+   - name: Configure IPA
+     shell: yes | ipa-client-install --domain=us-central1-a.c.docker-251717.internal --server=ipa.us-central1-a.c.docker-251717.internal --realm US-CENTRAL1-A.C.DOCKER-251717.INTERNAL --principal=admin --password=12345678 --mkhomedir --enable-dns-updates
